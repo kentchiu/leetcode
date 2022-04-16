@@ -10,6 +10,7 @@ def rotate(nums: list[int], k: int) -> None:
     """
     for i in range(0, k):
         last = nums[len(nums) - 1]
+        # TODO: insert and pop only once and use index switch to improve performance
         nums.insert(0, last)
         nums.pop(len(nums) - 1)
 
