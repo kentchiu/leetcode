@@ -6,6 +6,8 @@ cost: 120 minutes, 94%
 Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
 A.K.A: indexOf
 """
+
+
 def str_str(haystack: str, needle: str) -> int:
     if len(needle) == 0 or len(haystack) == 0:
         return 0
