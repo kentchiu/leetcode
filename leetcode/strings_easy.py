@@ -1,4 +1,30 @@
+import re
+import math
 #  Reverse String, First Unique Character in a String, String to Integer (atoi) and Implement strStr().
+
+"""
+cost: 180 minutes, 63%
+Implement the myAtoi(string s) function, which converts a string to a 32-bit signed integer (similar to C/C++'s atoi function).
+"""
+def my_atoi(s: str) -> int:
+    regex = r"^\s*(?P<num>[+|-]?\d+\.?\d*)"
+    match = re.search(regex, s, re.DOTALL | re.MULTILINE)
+    if match is None:
+        return 0
+
+    num_val = match.group()
+    try:
+        int_value = int(float(num_val))
+    except:
+        return 0
+
+    max_int = int(math.pow(2, 31) - 1)
+    min_int = int(math.pow(-2, 31) )
+    if int_value > max_int:
+        return max_int
+    if int_value < min_int:
+        return min_int
+    return int_value
 
 
 """
@@ -11,6 +37,7 @@ def first_uniq_char(s: str) -> int:
     ## shortcircuit for single character
     if len(s) == 1:
         return 0
+
     duplicates = set()
     for idx, c in enumerate(s):
         if idx > len(s) - 1:

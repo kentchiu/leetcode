@@ -1,5 +1,18 @@
-from leetcode.strings_easy import reverse_string, first_uniq_char
+import math
+from leetcode.strings_easy import reverse_string, first_uniq_char, my_atoi
 
+
+def test_my_atoi():
+    assert my_atoi("42") == 42
+    assert my_atoi("    -42") == -42
+    assert my_atoi("4193 with word") == 4193
+    assert my_atoi("123456789012345678901234567890") == math.pow(2, 31) - 1
+    assert my_atoi("-123456789012345678901234567890") == math.pow(-2, 31)
+    assert my_atoi("words and 987") == 0
+    assert my_atoi("3.14159") == 3
+    assert my_atoi(" ") == 0
+    assert my_atoi("") == 0
+    assert my_atoi("  -0012a42") == -12
 
 def test_first_uniq_char():
     assert first_uniq_char("dddccdbba") == 8
