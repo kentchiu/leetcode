@@ -1,4 +1,10 @@
-from leetcode.array_easy import remove_duplicates
+from leetcode.array_easy import remove_duplicates, max_profit
+
+
+def test_max_profit():
+    assert max_profit([7, 1, 5, 3, 6, 4]) == 7
+    assert max_profit([1,2,3,4,5]) == 4
+    assert max_profit([7,6,4,3,1]) == 0
 
 
 def test_remove_duplicates_1():
