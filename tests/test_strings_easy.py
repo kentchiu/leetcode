@@ -1,6 +1,14 @@
 import math
-from leetcode.strings_easy import reverse_string, first_uniq_char, my_atoi
 
+from leetcode.strings_easy import reverse_string, first_uniq_char, my_atoi, str_str
+
+
+def test_str_str():
+    assert str_str(haystack ="hello", needle="") == 0
+    assert str_str(haystack="hello", needle="ll") == 2
+    assert str_str(haystack ="hello", needle="bba") == -1
+    assert str_str(haystack ="aaaaa", needle="bba") == -1
+    assert str_str(haystack ="mississippi", needle="issipi") == -1
 
 def test_my_atoi():
     assert my_atoi("42") == 42
@@ -13,6 +21,7 @@ def test_my_atoi():
     assert my_atoi(" ") == 0
     assert my_atoi("") == 0
     assert my_atoi("  -0012a42") == -12
+
 
 def test_first_uniq_char():
     assert first_uniq_char("dddccdbba") == 8
