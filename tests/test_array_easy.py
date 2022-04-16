@@ -17,15 +17,15 @@ def test_rotate():
     rotate(nums, k)
     assert nums == [5, 6, 7, 1, 2, 3, 4]
 
-    nums = [-1,-100,3,99]
+    nums = [-1, -100, 3, 99]
     k = 1
     rotate(nums, k)
-    assert nums ==  [99,-1,-100,3]
+    assert nums == [99, -1, -100, 3]
 
-    nums = [-1,-100,3,99]
+    nums = [-1, -100, 3, 99]
     k = 2
     rotate(nums, k)
-    assert nums == [3,99,-1,-100]
+    assert nums == [3, 99, -1, -100]
 
 
 def test_max_profit():

@@ -2,6 +2,8 @@
 cost 60 minutes, 15%
 Given an array, rotate the array to the right by k steps, where k is non-negative.
 """
+
+
 def rotate(nums: list[int], k: int) -> None:
     """
     Do not return anything, modify nums in-place instead.
@@ -9,7 +11,7 @@ def rotate(nums: list[int], k: int) -> None:
     for i in range(0, k):
         last = nums[len(nums) - 1]
         nums.insert(0, last)
-        nums.pop(len(nums) -1)
+        nums.pop(len(nums) - 1)
 
 
 """
@@ -18,7 +20,9 @@ You are given an integer array prices where prices[i] is the price of a given st
 On each day, you may decide to buy and/or sell the stock. You can only hold at most one share of the stock at any time. However, you can buy it then immediately sell it on the same day.
 Find and return the maximum profit you can achieve.
 """
-def max_profit(prices: list[int] ) -> int:
+
+
+def max_profit(prices: list[int]) -> int:
     profits: list[int] = []
     i = 1
     while i < len(prices):
@@ -30,6 +34,7 @@ def max_profit(prices: list[int] ) -> int:
         i += 1
     return sum(profits)
 
+
 """
 cost: 240 minutes, 33%
 Remove Duplicates from Sorted Array
@@ -38,6 +43,8 @@ Since it is impossible to change the length of the array in some languages, you 
 Return k after placing the final result in the first k slots of nums.
 Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.
 """
+
+
 def remove_duplicates(nums: list[int]) -> int:
     p1 = 0
     p2 = 1
@@ -50,5 +57,3 @@ def remove_duplicates(nums: list[int]) -> int:
         else:
             nums.pop(p2)
     return len(nums)
-
-
