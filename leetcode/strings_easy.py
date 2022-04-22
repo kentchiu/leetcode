@@ -1,14 +1,13 @@
 import math
 import re
 
-"""
-cost: 120 minutes, 94%
-Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
-A.K.A: indexOf
-"""
-
 
 def str_str(haystack: str, needle: str) -> int:
+    """
+    cost: 120 minutes, 94%
+    Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+    A.K.A: indexOf
+    """
     if len(needle) == 0 or len(haystack) == 0:
         return 0
     if len(needle) > len(haystack):
@@ -32,13 +31,11 @@ def str_str(haystack: str, needle: str) -> int:
     return -1
 
 
-"""
-cost: 180 minutes, 63%
-Implement the myAtoi(string s) function, which converts a string to a 32-bit signed integer (similar to C/C++'s atoi function).
-"""
-
-
 def my_atoi(s: str) -> int:
+    """
+    cost: 180 minutes, 63%
+    Implement the myAtoi(string s) function, which converts a string to a 32-bit signed integer (similar to C/C++'s atoi function).
+    """
     regex = r"^\s*(?P<num>[+|-]?\d+\.?\d*)"
     match = re.search(regex, s, re.DOTALL | re.MULTILINE)
     if match is None:
@@ -59,13 +56,11 @@ def my_atoi(s: str) -> int:
     return int_value
 
 
-"""
-cost: 90 minutes, 97%
-Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
-"""
-
-
 def first_uniq_char(s: str) -> int:
+    """
+    cost: 90 minutes, 97%
+    Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
+    """
     ## shortcircuit for single character
     if len(s) == 1:
         return 0
@@ -85,15 +80,11 @@ def first_uniq_char(s: str) -> int:
     return -1
 
 
-"""
-cost: 45 minutes, 78%
-Write a function that reverses a string. The input string is given as an array of characters s.
-You must do this by modifying the input array in-place with O(1) extra memory.
-"""
-
-
 def reverse_string(s: list[str]) -> None:
     """
+    cost: 45 minutes, 78%
+    Write a function that reverses a string. The input string is given as an array of characters s.
+    You must do this by modifying the input array in-place with O(1) extra memory.
     Do not return anything, modify s in-place instead.
     """
     s.insert(0, ' ')
