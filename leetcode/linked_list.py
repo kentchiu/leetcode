@@ -31,21 +31,6 @@ class ListNode:
         self.val = val
         self.next = next
 
-    def __str__(self):
-        return str(f'{self.val} -> {self.next}')
-
-    def __repr__(self):
-        # print('--------------------')
-        nums = []
-        node = self
-        while node is not None:
-            nums.append(node.val)
-            # print(f'node.val: {node.val}')
-            node = node.next
-
-        return str(nums)
-
-
 
 def reverse_list_deprecated(head: ListNode | None) -> ListNode | None:
     """
@@ -82,6 +67,7 @@ def reverse_list(head: ListNode | None) -> ListNode | None:
 
 def merge_two_lists(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
     """
+    cost: days
     You are given the heads of two sorted linked lists list1 and list2.
     Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.
     Return the head of the merged linked list.
@@ -90,25 +76,90 @@ def merge_two_lists(list1: ListNode | None, list2: ListNode | None) -> ListNode 
 
 
 def merge_two_lists_by_loop(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
-    pre_head = ListNode(None)
-    tail = pre_head
+    """
+    list 1: 1 -> 2 -> 4
+    list 2: 1 -> 3 -> 4
+    result: 1 -> 1 -> 2 -> 3 -> 4 -> 4
+
+    init state:
+        dummy (固定不動)
+        prev(前一個node) = dump
+            v
+            1 -> 2 -> 4
+            v
+            1 -> 3 -> 4
+
+    step 1:
+        list1 < list2 -> yes
+        prev.next = list1
+        list1 = list1.next
+        prev = prev.next
+
+                prev  v
+        dummy ->  1 -> 2 -> 4
+                 v
+                 1 -> 3 -> 4
+
+    step 2:
+        list1 < list2 -> no
+        prev.next = list2
+        list2 = list2.next
+        prev = prev.next
+
+                      v
+        dummy ->  1 -> 2 -> 4
+                prev  v
+                 1 -> 3 -> 4
+
+    step 3:
+        list1 < list2 -> yes
+        prev.next = list1
+        list1 = list1.next
+        prev = prev.next
+
+                     prev  v
+        dummy ->  1 -> 2 -> 4
+                      v
+                 1 -> 3 -> 4
+
+    step N:
+        while list1 is None and list2  is not None
+            list1 < list2 -> yes
+            prev.next = list1
+            list1 = list1.next
+        prev = prev.next
+
+                          prev v
+        dummy ->  1 -> 2 -> 4
+                           v
+                 1 -> 3 -> 4
+
+    step last:
+       prev.next = list1 if list is not None else list2
+
+    """
+
+    dummy = ListNode()
+    prev = dummy
 
     while list1 and list2:
-        if list1.val <= list2.val:
-            tail.next = list1
+        if list1.val < list2.val:
+            prev.next = list1
             list1 = list1.next
         else:
-            tail.next = list2
+            prev.next = list2
             list2 = list2.next
-        print(f'pre_head: {repr(pre_head)},tail:{repr(tail)}, val: {tail.val}, next: {repr(tail.next)}')
-        tail = tail.next
+
+        prev = prev.next
 
     if list1 is None:
-        tail.next = list2
-    elif list2 is None:
-        tail.next = list1
+        prev.next = list2
+    else:
+        prev.next = list1
 
-    return pre_head.next
+    return dummy.next
+
+
 
 def merge_two_lists_by_recursive(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
     if list1 is None:
@@ -117,10 +168,10 @@ def merge_two_lists_by_recursive(list1: ListNode | None, list2: ListNode | None)
         return list1
 
     if list1.val < list2.val:
-        list1.next =  merge_two_lists_by_recursive(list1.next, list2)
+        list1.next = merge_two_lists_by_recursive(list1.next, list2)
         return list1
     else:
-        list2.next =  merge_two_lists_by_recursive(list1, list2.next)
+        list2.next = merge_two_lists_by_recursive(list1, list2.next)
         return list2
 
 
@@ -134,6 +185,7 @@ def merge_two_lists_by_list(list1: ListNode | None, list2: ListNode | None) -> L
     l3 = sorted(l1)
     return list_to_lined_list(l3)
 
+
 def linked_list_to_list(node: ListNode) -> [int]:
     # linked list to list
     result: [int] = []
@@ -142,22 +194,47 @@ def linked_list_to_list(node: ListNode) -> [int]:
         node = node.next
     return result
 
+
 def list_to_lined_list(vals: [int]) -> ListNode:
     nodes = [ListNode(val) for val in vals]
     for idx, node in enumerate(nodes):
         if idx < len(nodes) - 1:
             node.next = nodes[idx + 1]
-    return  nodes[0]
+    return nodes[0]
 
 
 def create_linked_list_from_list(nums: list):
     """
     Util method which convert list to linked list
     """
+    if len(nums) == 0:
+        return None
+
     nodes = [ListNode(num) for num in nums]
     for idx, n in enumerate(nodes):
-        if (idx < len(nodes) - 1):
+        if idx < len(nodes) - 1:
             nodes[idx].next = nodes[idx + 1]
         else:
             nodes[idx].next = None
     return nodes[0]
+
+
+def print_linked_list(node: ListNode, format='arrow') -> str:
+    """
+    Util method for print linked list
+    """
+    print(f'{node}')
+    result = ''
+    while node:
+        result += str(node.val)
+        if node.next:
+            if format == 'list':
+                result += ', '
+            else:
+                result += ' -> '
+        node = node.next
+
+    if format == 'list':
+        result = '[' + result + ']'
+
+    return result
