@@ -24,6 +24,7 @@ linked list 通常是要求用 in place 處理, 充分利用 linked list 特性,
 3. 用 node = node.next 讓指標前進到下一個 node
 
 """
+from typing import Optional
 
 
 class ListNode:
@@ -160,7 +161,6 @@ def merge_two_lists_by_loop(list1: ListNode | None, list2: ListNode | None) -> L
     return dummy.next
 
 
-
 def merge_two_lists_by_recursive(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
     if list1 is None:
         return list2
@@ -184,6 +184,153 @@ def merge_two_lists_by_list(list1: ListNode | None, list2: ListNode | None) -> L
     l1.extend(l2)
     l3 = sorted(l1)
     return list_to_lined_list(l3)
+
+
+def delete_node(node: ListNode):
+    """
+    cost: 45 minutes
+    Write a function to delete a node in a singly-linked list. You will not be given access to the head of the list, instead you will be given access to the node to be deleted directly.
+    It is guaranteed that the node to be deleted is not a tail node in the list.
+
+    :type node: ListNode
+    :rtype: void Do not return anything, modify node in-place instead.
+    """
+
+    while node.next:
+        node.val = node.next.val
+        if node.next.next:
+            node = node.next
+        else:
+            node.next = None
+
+
+def remove_nth_from_end(head: ListNode | None, n: int) -> ListNode | None:
+    """
+    Given the head of a linked list, remove the nth node from the end of the list and return its head.
+    """
+
+    if n == 0:
+        return head
+
+    temp = head
+    length = 0
+
+    while temp:
+        length += 1
+        temp = temp.next
+
+    idx_remove = length - n
+
+    if idx_remove == 0:
+        head = head.next
+        return head
+
+    if length == 0:
+        head = None
+        return head
+
+    if length == 2:
+        if n == 1:
+            head.next = None
+        return head
+
+    idx = 0
+    curr = head
+    while curr:
+        # 前門還有有 head 可以串接的狀況
+        if idx_remove > 0 and idx == idx_remove - 1:
+            curr.next = curr.next.next
+        else:
+            curr = curr.next
+        idx += 1
+
+    return head
+
+
+def is_palindrome(head: ListNode | None) -> bool:
+    if head is None:
+        return False
+
+    if head is not None:
+        # only one node
+        if head.next is None:
+            return True
+        # only two nodes
+        elif head.next.next is None:
+            # two nodes is equals
+            if head.val == head.next.val:
+                return True
+
+    fast = head
+    slow = head
+
+    while fast.next and fast.next.next:
+        slow = slow.next
+        fast = fast.next.next
+
+    stack = []
+    middle = slow.next
+    while middle:
+        stack.append(middle.val)
+        middle = middle.next
+
+    while head and len(stack) != 0:
+        if head.val != stack.pop():
+            return False
+        head = head.next
+
+    return True
+
+
+def middle_node(head: Optional[ListNode]) -> Optional[ListNode]:
+    r"""
+    cost: 60 minutes
+    Given the head of a singly linked list, return the middle node of the linked list.
+    If there are two middle nodes, return the second middle node.
+
+    Input: head = [1,2,3,4,5]
+    Output: [3,4,5]
+    Explanation: The middle node of the list is node 3.
+    """
+    fast = head
+    slow = head
+
+    if fast is None or fast.next is None or fast.next.next is None:
+        return None
+
+    while fast.next and fast.next.next:
+        slow = slow.next
+        fast = fast.next.next
+
+    if fast.next:
+        return slow.next
+    else:
+        return slow
+
+
+def has_cycle(head: Optional[ListNode]) -> bool:
+    r"""
+    cost: 45 minutes
+    Given head, the head of a linked list, determine if the linked list has a cycle in it.
+    There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+    Return true if there is a cycle in the linked list. Otherwise, return false.
+    """
+    if head is None:
+        return False
+
+    slow = fast = head
+    while fast and fast.next and fast.next.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+
+    return False
+
+
+#######################################
+# Util Methods
+#######################################
 
 
 def linked_list_to_list(node: ListNode) -> [int]:
@@ -223,7 +370,6 @@ def print_linked_list(node: ListNode, format='arrow') -> str:
     """
     Util method for print linked list
     """
-    print(f'{node}')
     result = ''
     while node:
         result += str(node.val)
