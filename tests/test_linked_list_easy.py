@@ -1,4 +1,4 @@
-from leetcode.linked_list import reverse_list, create_linked_list_from_list, merge_two_lists_by_list, \
+from leetcode.linked_list_easy import reverse_list, create_linked_list_from_list, merge_two_lists_by_list, \
     merge_two_lists_by_loop, merge_two_lists_by_recursive, print_linked_list, delete_node, remove_nth_from_end, \
     is_palindrome, middle_node, has_cycle
 
