@@ -59,9 +59,13 @@ def reverse_list_deprecated(head: ListNode | None) -> ListNode | None:
 def reverse_list(head: ListNode | None) -> ListNode | None:
     prev = None
     while head:
+        # 指標反向前需要先備份
         next = head.next
+        # 目前所在的指標反向
         head.next = prev
+        # 前一個節點前進一步
         prev = head
+        # 目前節點前進一步
         head = next
     return prev
 
