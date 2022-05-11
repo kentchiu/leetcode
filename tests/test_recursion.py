@@ -22,14 +22,17 @@ def test_print_n_to_1():
 
 
 def reverse_string(input: str):
+    # Base Conditon
     if input == '':
         return ""
 
-    # Hypothesis
-    s = reverse_string(input[1:])
+     # Shrink th problem space
+    shrink = input[1:]
+    s = reverse_string(shrink)
 
-    # Induction
-    return s + input[0]
+    # Smallest unit of work to contribute
+    head = input[0]
+    return s + head
 
 
 def test_reverse_string():
@@ -37,13 +40,17 @@ def test_reverse_string():
 
 
 def is_palindrome(input: str) -> bool:
+    # Base Conditon
     if len(input) < 2:
         return True
+
     head = input[0]
     tail = input[-1]
 
-    if head == tail:
-        return is_palindrome(input[1: -1])
+    if head == tail:  # Smallest unit of work to contribute
+        # Shrink th problem space
+        shrink = input[1: -1]
+        return is_palindrome(shrink)
     else:
         return False
 
@@ -53,3 +60,25 @@ def test_is_palindrome():
     assert is_palindrome('abc') == False
     assert is_palindrome('abcba') == True
     assert is_palindrome('racecar') == True
+
+
+def decimal_to_binary(decimal: int) -> str:
+    # Base Condition
+    if decimal < 2:
+        return str(decimal)
+
+    # Shrink the problem space
+    shrink = decimal // 2
+    # Smallest unit of work to contribute
+    rem = str(decimal % 2)
+
+    s = decimal_to_binary(shrink)
+    return s + rem
+
+
+def test_decimal_to_binary():
+    assert decimal_to_binary(1) == '1'
+    assert decimal_to_binary(0) == '0'
+    assert decimal_to_binary(15) == '1111'
+    assert decimal_to_binary(8) == '1000'
+    assert decimal_to_binary(233) == '11101001'
