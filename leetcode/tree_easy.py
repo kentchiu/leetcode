@@ -37,6 +37,24 @@ def max_depth(root: Optional[TreeNode]) -> int:
     return visit(root, 0)
 
 
+def max_depth_2(root: Optional[TreeNode]) -> int:
+    def max_depth(node: Optional[TreeNode]):
+        # Base Condition
+        if node is None:
+            return 0
+
+        # Hypothesis
+        left = max_depth(node.left)
+        right = max_depth(node.right)
+
+        print(f'node:{node.val},L-depth:{left},R-depth:{right}')
+
+        # Induction
+        return max(left, right) + 1
+
+    return max_depth(root)
+
+
 def is_valid_BST(root: Optional[TreeNode]) -> bool:
     # Use maximal system integer to represent infinity
     import sys

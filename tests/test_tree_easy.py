@@ -1,6 +1,6 @@
 from ast import For
 
-from leetcode.tree_easy import create_tree_from_list, is_symmetric, level_order, sorted_array_to_BST, visit, Order, max_depth, is_valid_BST
+from leetcode.tree_easy import create_tree_from_list, is_symmetric, level_order, max_depth_2, sorted_array_to_BST, visit, Order, max_depth, is_valid_BST
 
 
 def test_is_valid_BST():
@@ -17,6 +17,13 @@ def test_is_valid_BST():
 def test_max_depth():
     assert max_depth(create_tree_from_list([3, 9, 30, None, None, 15, 7])) == 3
     assert max_depth(create_tree_from_list([1, None, 2])) == 2
+
+
+def test_max_depth_2():
+    # assert max_depth_2(create_tree_from_list(
+    #     [3, 9, 30, None, None, 15, 7])) == 3
+    # assert max_depth_2(create_tree_from_list([1, None, 2])) == 2
+    assert max_depth_2(create_tree_from_list([1, 2, 3, 4, 5, 6, 7, 8, 9])) == 4
 
 
 def test_is_symmetric():
