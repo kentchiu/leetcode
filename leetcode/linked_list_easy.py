@@ -25,6 +25,7 @@ linked list 通常是要求用 in place 處理, 充分利用 linked list 特性,
 
 """
 from typing import Optional
+from xml.dom.minicompat import NodeList
 
 
 class ListNode:
@@ -68,6 +69,16 @@ def reverse_list(head: ListNode | None) -> ListNode | None:
         # 目前節點前進一步
         head = next
     return prev
+
+
+def reverse_list_recursive(head: Optional[NodeList]) -> Optional[NodeList]:
+    # Base Condition
+    if head == None or head.next == None:
+        return head
+    p = reverse_list_recursive(head.next)
+    head.next.next = head
+    head.next = None
+    return p
 
 
 def merge_two_lists(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:

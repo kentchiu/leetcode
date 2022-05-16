@@ -1,6 +1,6 @@
 from leetcode.linked_list_easy import reverse_list, create_linked_list_from_list, merge_two_lists_by_list, \
     merge_two_lists_by_loop, merge_two_lists_by_recursive, print_linked_list, delete_node, remove_nth_from_end, \
-    is_palindrome, middle_node, has_cycle
+    is_palindrome, middle_node, has_cycle, reverse_list_recursive
 
 
 def test_reverse_list():
@@ -16,25 +16,41 @@ def test_reverse_list():
     assert print_linked_list(result, format='list') == '[5, 4, 3, 2, 1]'
 
 
+def test_reverse_list_recursive():
+    head = create_linked_list_from_list([1, 2, 3, 4, 5])
+    result = reverse_list_recursive(head)
+
+    assert result.val == 5
+    assert result.next.val == 4
+    assert result.next.next.val == 3
+    assert result.next.next.next.val == 2
+    assert result.next.next.next.next.val == 1
+    assert result.next.next.next.next.next is None
+    assert print_linked_list(result, format='list') == '[5, 4, 3, 2, 1]'
+
+
 def test_merge_two_list_by_loop():
     list1 = create_linked_list_from_list([1, 2, 4])
     list2 = create_linked_list_from_list([1, 3, 4])
 
-    assert print_linked_list(merge_two_lists_by_loop(list1, list2), format='list') == '[1, 1, 2, 3, 4, 4]'
+    assert print_linked_list(merge_two_lists_by_loop(
+        list1, list2), format='list') == '[1, 1, 2, 3, 4, 4]'
 
 
 def test_merge_two_list_by_recursive():
     list1 = create_linked_list_from_list([1, 2, 4])
     list2 = create_linked_list_from_list([1, 3, 4])
 
-    assert print_linked_list(merge_two_lists_by_recursive(list1, list2), format='list') == '[1, 1, 2, 3, 4, 4]'
+    assert print_linked_list(merge_two_lists_by_recursive(
+        list1, list2), format='list') == '[1, 1, 2, 3, 4, 4]'
 
 
 def test_merge_two_list_by_list():
     list1 = create_linked_list_from_list([1, 2, 4])
     list2 = create_linked_list_from_list([1, 3, 4])
 
-    assert print_linked_list(merge_two_lists_by_list(list1, list2), format='list') == '[1, 1, 2, 3, 4, 4]'
+    assert print_linked_list(merge_two_lists_by_list(
+        list1, list2), format='list') == '[1, 1, 2, 3, 4, 4]'
 
 
 def test_delete_note():
@@ -46,19 +62,24 @@ def test_delete_note():
 
 def test_remove_nth_from_end():
     head = create_linked_list_from_list([1, 2, 3, 4, 5])
-    assert print_linked_list(remove_nth_from_end(head, 2), format='list') == '[1, 2, 3, 5]'
+    assert print_linked_list(remove_nth_from_end(
+        head, 2), format='list') == '[1, 2, 3, 5]'
 
     head2 = create_linked_list_from_list([1])
-    assert print_linked_list(remove_nth_from_end(head2, 1), format='list') == '[]'
+    assert print_linked_list(remove_nth_from_end(
+        head2, 1), format='list') == '[]'
 
     head3 = create_linked_list_from_list([1, 2])
-    assert print_linked_list(remove_nth_from_end(head3, 1), format='list') == '[1]'
+    assert print_linked_list(remove_nth_from_end(
+        head3, 1), format='list') == '[1]'
 
     head4 = create_linked_list_from_list([1, 2])
-    assert print_linked_list(remove_nth_from_end(head4, 2), format='list') == '[2]'
+    assert print_linked_list(remove_nth_from_end(
+        head4, 2), format='list') == '[2]'
 
     head5 = create_linked_list_from_list([1, 2, 3])
-    assert print_linked_list(remove_nth_from_end(head5, 3), format='list') == '[2, 3]'
+    assert print_linked_list(remove_nth_from_end(
+        head5, 3), format='list') == '[2, 3]'
 
 
 def test_is_palindrome():
@@ -73,7 +94,8 @@ def test_is_palindrome():
 
 def test_middle_node():
     assert middle_node(create_linked_list_from_list([1, 2, 3, 4, 5])).val == 3
-    assert middle_node(create_linked_list_from_list([1, 2, 3, 4, 5, 6])).val == 4
+    assert middle_node(create_linked_list_from_list(
+        [1, 2, 3, 4, 5, 6])).val == 4
     assert middle_node(create_linked_list_from_list([1, 2])) is None
     assert middle_node(create_linked_list_from_list([1])) is None
     assert middle_node(None) is None
