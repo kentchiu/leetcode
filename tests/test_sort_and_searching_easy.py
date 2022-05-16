@@ -1,6 +1,6 @@
 
 
-from leetcode.sort_and_searching_easy import merge
+from leetcode.sort_and_searching_easy import first_bad_version, merge
 
 
 def test_merge():
@@ -31,3 +31,7 @@ def test_merge():
     n = 1
     merge(nums1=nums1, m=m, nums2=nums2, n=n)
     assert nums1 == [1, 2]
+
+
+def test_first_bad_version():
+    assert first_bad_version(2) == 2
