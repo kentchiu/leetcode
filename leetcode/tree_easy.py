@@ -235,3 +235,38 @@ def visit(node: TreeNode, order: Order = Order.PREORDER, callback=None):
 
         if order is Order.POSTORDER:
             callback(node)
+
+
+def prettyPrintTree(node, prefix="", isLeft=True):
+    if not node:
+        print("Empty Tree")
+        return
+
+    if node.right:
+        prettyPrintTree(node.right, prefix +
+                        ("│   " if isLeft else "    "), False)
+
+    print(prefix + ("└── " if isLeft else "┌── ") + str(node.val))
+
+    if node.left:
+        prettyPrintTree(node.left, prefix +
+                        ("    " if isLeft else "│   "), True)
+
+
+def stringToIntegerList(input):
+    return json.loads(input)
+
+
+def stringToListNode(input):
+    # Generate list from the input
+    numbers = stringToIntegerList(input)
+
+    # Now convert that list into linked list
+    dummyRoot = ListNode(0)
+    ptr = dummyRoot
+    for number in numbers:
+        ptr.next = ListNode(number)
+        ptr = ptr.next
+
+    ptr = dummyRoot.next
+    return ptr

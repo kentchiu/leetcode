@@ -399,3 +399,25 @@ def print_linked_list(node: ListNode, format='arrow') -> str:
         result = '[' + result + ']'
 
     return result
+
+
+def prettyPrintLinkedList(node):
+    while node and node.next:
+        print(str(node.val) + "->", end='')
+        node = node.next
+
+    if node:
+        print(node.val)
+    else:
+        print("Empty LinkedList")
+
+
+def listNodeToString(node):
+    if not node:
+        return "[]"
+
+    result = ""
+    while node:
+        result += str(node.val) + ", "
+        node = node.next
+    return "[" + result[:-2] + "]"
