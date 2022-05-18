@@ -9,6 +9,7 @@ from typing import List
 
 
 def climb_stairs(n: int) -> int:
+    # 沒有用到 DP, DP通常會使用 iteration 而不是 recursion
     def dfs(i: int, memo: dict) -> int:
         # 使用 dict.get() 在 key 不存在時, 才不會報錯
         if memo.get(i):
@@ -30,7 +31,7 @@ def test_climb_stairs():
     assert climb_stairs(5) == 8
 
 
-def max_profit(prices: List[int]) -> int:
+def max_profit_timeout(prices: List[int]) -> int:
     # 沒有到 DP
     # out of time
     max = 0
@@ -41,6 +42,9 @@ def max_profit(prices: List[int]) -> int:
             if profit > max:
                 max = profit
     return max
+
+
+def max_profit(prices: List[int]) -> int:
 
 
 def test_max_profit():
