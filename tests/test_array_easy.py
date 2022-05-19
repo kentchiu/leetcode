@@ -1,4 +1,4 @@
-from leetcode.array_easy import remove_duplicates, max_profit, rotate
+from leetcode.array_easy import remove_duplicates, max_profit, rotate, two_sum
 
 
 def test_rotate():
@@ -42,7 +42,7 @@ def test_remove_duplicates_1():
     assert k == len(expected_nums)
 
     for i, expected in enumerate(expected_nums):
-        assert nums[i] == expected;
+        assert nums[i] == expected
 
 
 def test_remove_duplicates_2():
@@ -53,4 +53,11 @@ def test_remove_duplicates_2():
     assert k == len(expected_nums)
 
     for i, expected in enumerate(expected_nums):
-        assert nums[i] == expected;
+        assert nums[i] == expected
+
+
+def test_two_sum():
+    assert two_sum(nums=[2, 7, 11, 15], target=9) == [0, 1]
+    assert two_sum(nums=[3, 2, 4], target=6) == [1, 2]
+    assert two_sum(nums=[3, 3],  target=6) == [0, 1]
+    assert two_sum(nums=[4, 7, 11, 15, 1, 2, 3], target=9) == [1, 5]

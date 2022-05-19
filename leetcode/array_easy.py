@@ -1,3 +1,6 @@
+from typing import List
+
+
 def rotate(nums: list[int], k: int) -> None:
     """
     cost 60 minutes, 15%
@@ -50,3 +53,12 @@ def remove_duplicates(nums: list[int]) -> int:
         else:
             nums.pop(p2)
     return len(nums)
+
+
+def two_sum(nums: List[int], target: int) -> List[int]:
+    length = len(nums)
+
+    for i in range(length):
+        for j in range(i + 1, length):
+            if nums[i] + nums[j] == target:
+                return [i, j]
