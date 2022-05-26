@@ -421,3 +421,20 @@ def listNodeToString(node):
         result += str(node.val) + ", "
         node = node.next
     return "[" + result[:-2] + "]"
+
+
+def delete_duplicates(head: ListNode) -> ListNode:
+    """
+    problem: https://leetcode.cn/problems/remove-duplicates-from-sorted-list
+    """
+
+    # Base case
+    if head == None or head.next == None:
+        return head
+
+    if head.val == head.next.val:
+        head.next = head.next.next
+        delete_duplicates(head)
+    else:
+        delete_duplicates(head.next)
+    return head

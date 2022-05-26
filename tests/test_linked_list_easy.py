@@ -1,4 +1,4 @@
-from leetcode.linked_list_easy import reverse_list, create_linked_list_from_list, merge_two_lists_by_list, \
+from leetcode.linked_list_easy import delete_duplicates,  reverse_list, create_linked_list_from_list, merge_two_lists_by_list, \
     merge_two_lists_by_loop, merge_two_lists_by_recursive, print_linked_list, delete_node, remove_nth_from_end, \
     is_palindrome, middle_node, has_cycle, reverse_list_recursive
 
@@ -156,3 +156,17 @@ def test_print_linked_list():
 
     l4 = create_linked_list_from_list([])
     assert str(print_linked_list(l4)) == ''
+
+
+def test_delete_duplicated():
+    l1 = create_linked_list_from_list([1, 1, 2])
+    assert print_linked_list(delete_duplicates(l1), format='list') == '[1, 2]'
+    l2 = create_linked_list_from_list([1, 1, 2, 3, 3])
+    assert print_linked_list(delete_duplicates(
+        l2), format='list') == '[1, 2, 3]'
+    l3 = create_linked_list_from_list([1, 1, 2, 3, 3, 4, 4, 5])
+    assert print_linked_list(delete_duplicates(
+        l3), format='list') == '[1, 2, 3, 4, 5]'
+    l4 = create_linked_list_from_list([1, 1, 1])
+    assert print_linked_list(delete_duplicates(
+        l4), format='list') == '[1]'
