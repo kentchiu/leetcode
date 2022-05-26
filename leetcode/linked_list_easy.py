@@ -432,15 +432,9 @@ def delete_duplicates(head: ListNode) -> ListNode:
     if head == None or head.next == None:
         return head
 
-    # if head.val == head.next.val:
-    #     head.next = head.next.next
-    #     delete_duplicates(head)
-    # else:
-    #     delete_duplicates(head.next)
-    # return head
-
-    if head.val != head.next.val:
-        head = head.next
-    else:
+    if head.val == head.next.val:
         head.next = head.next.next
-        return delete_duplicates(head)
+        delete_duplicates(head)
+    else:
+        delete_duplicates(head.next)
+    return head
