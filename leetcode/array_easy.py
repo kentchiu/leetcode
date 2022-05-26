@@ -55,10 +55,21 @@ def remove_duplicates(nums: list[int]) -> int:
     return len(nums)
 
 
-def two_sum(nums: List[int], target: int) -> List[int]:
+def two_sum_slow(nums: List[int], target: int) -> List[int]:
     length = len(nums)
 
     for i in range(length):
         for j in range(i + 1, length):
             if nums[i] + nums[j] == target:
                 return [i, j]
+
+
+def two_sum(nums: List[int], target: int) -> List[int]:
+    for idx, n in enumerate(nums):
+        # python 的 try catch cost 很低, 3.11 後, 甚至有 zero cost 的 exception handling
+        try:
+            # index 可以指定從 idx + 1 開始找, !!!python AWESOME!!!
+            idx2 = nums.index(target - n, idx + 1)
+            return [idx, idx2]
+        except ValueError:
+            pass
