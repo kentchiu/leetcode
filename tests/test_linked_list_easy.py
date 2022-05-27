@@ -197,3 +197,88 @@ def sum(head: ListNode) -> int:
 def test_sum():
     l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
     assert sum(l1) == 15
+
+
+def append_node(head: ListNode, val: int) -> ListNode:
+    if not head:
+        return ListNode(val)
+    head.next = append_node(head.next, val)
+    return head
+
+
+def insert_sorted(head: ListNode, val: int) -> ListNode:
+    if not head:
+        return ListNode(val)
+
+    if val < head.val:
+        head = ListNode(val, head)
+    else:
+        head.next = insert_sorted(head.next, val)
+
+    return head
+
+
+def test_append_node():
+    l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
+    l1_new = append_node(l1, 9)
+    assert print_linked_list(l1_new, format='list') == '[1, 2, 3, 4, 5, 9]'
+    l2_new = append_node(l1_new, 6)
+    assert print_linked_list(
+        l2_new, format='list') == '[1, 2, 3, 4, 5, 9, 6]'
+
+
+def test_insert_sorted():
+    l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
+    l1_new = insert_sorted(l1, 9)
+    assert print_linked_list(l1_new, format='list') == '[1, 2, 3, 4, 5, 9]'
+    l2_new = insert_sorted(l1_new, 6)
+    assert print_linked_list(
+        l2_new, format='list') == '[1, 2, 3, 4, 5, 6, 9]'
+
+
+def remove_first(head: ListNode, val: int) -> ListNode:
+    if not head:
+        return None
+
+    if head.val == val:
+        head = head.next
+    else:
+        head.next = remove_first(head.next, val)
+
+    return head
+
+
+def test_remove_first():
+    l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
+    assert print_linked_list(remove_first(
+        l1, 1), format='list') == '[2, 3, 4, 5]'
+    l2 = create_linked_list_from_list([1, 2, 3, 4, 5])
+    assert print_linked_list(remove_first(
+        l2, 3), format='list') == '[1, 2, 4, 5]'
+    l3 = create_linked_list_from_list([1, 2, 3, 4, 5])
+    assert print_linked_list(remove_first(
+        l3, 5), format='list') == '[1, 2, 3, 4]'
+
+
+def remove_all(head: ListNode, val: int) -> ListNode:
+    if not head:
+        return None
+
+    if head.val == val:
+        head = remove_all(head.next, val)
+    else:
+        head.next = remove_all(head.next, val)
+
+    return head
+
+
+def test_remove_all():
+    l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
+    assert print_linked_list(remove_all(
+        l1, 1), format='list') == '[2, 3, 4, 5]'
+    l2 = create_linked_list_from_list([1, 2, 3, 4, 1])
+    assert print_linked_list(remove_all(
+        l2, 1), format='list') == '[2, 3, 4]'
+    l3 = create_linked_list_from_list([1, 2, 1, 4, 1])
+    assert print_linked_list(remove_all(
+        l3, 1), format='list') == '[2, 4]'
