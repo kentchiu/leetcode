@@ -1,4 +1,4 @@
-from leetcode.linked_list_easy import delete_duplicates,  reverse_list, create_linked_list_from_list, merge_two_lists_by_list, \
+from leetcode.linked_list_easy import ListNode, delete_duplicates, prettyPrintLinkedList,  reverse_list, create_linked_list_from_list, merge_two_lists_by_list, \
     merge_two_lists_by_loop, merge_two_lists_by_recursive, print_linked_list, delete_node, remove_nth_from_end, \
     is_palindrome, middle_node, has_cycle, reverse_list_recursive
 
@@ -170,3 +170,30 @@ def test_delete_duplicated():
     l4 = create_linked_list_from_list([1, 1, 1])
     assert print_linked_list(delete_duplicates(
         l4), format='list') == '[1]'
+
+
+def s_print(head: ListNode) -> None:
+    if not head:
+        return
+    print(f'-> {head.val}')
+    s_print(head.next)
+    print(f'<- {head.val}')
+
+
+def test_print():
+    l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
+    s_print(l1)
+
+
+def sum(head: ListNode) -> int:
+    if not head:
+        return 0
+    val = head.val
+    s = sum(head.next)
+    print(f'{val} + {s} = {val + s}')
+    return val + s
+
+
+def test_sum():
+    l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
+    assert sum(l1) == 15

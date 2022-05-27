@@ -24,6 +24,7 @@ linked list 通常是要求用 in place 處理, 充分利用 linked list 特性,
 3. 用 node = node.next 讓指標前進到下一個 node
 
 """
+from pprint import pprint
 from typing import Optional
 from xml.dom.minicompat import NodeList
 
@@ -343,6 +344,37 @@ def has_cycle(head: Optional[ListNode]) -> bool:
     return False
 
 
+def delete_duplicates(head: ListNode) -> ListNode:
+    """
+    problem: https://leetcode.cn/problems/remove-duplicates-from-sorted-list
+    """
+
+    # Base case
+    if head == None or head.next == None:
+        return head
+
+    if head.val == head.next.val:
+        head.next = head.next.next
+        delete_duplicates(head)
+    else:
+        delete_duplicates(head.next)
+    return head
+
+
+def delete_duplicates(head: ListNode) -> ListNode:
+    """
+    problem: https://leetcode.cn/problems/remove-duplicates-from-sorted-list
+    """
+
+    # Base case
+    if head == None or head.next == None:
+        return head
+    head.next = delete_duplicates(head.next)
+    if head.val == head.next.val:
+        head.next = head.next.next
+    return head
+
+
 #######################################
 # Util Methods
 #######################################
@@ -421,26 +453,3 @@ def listNodeToString(node):
         result += str(node.val) + ", "
         node = node.next
     return "[" + result[:-2] + "]"
-
-
-def delete_duplicates(head: ListNode) -> ListNode:
-    """
-    problem: https://leetcode.cn/problems/remove-duplicates-from-sorted-list
-    """
-
-    # Base case
-    if head == None or head.next == None:
-        return head
-
-    # if head.val == head.next.val:
-    #     head.next = head.next.next
-    #     delete_duplicates(head)
-    # else:
-    #     delete_duplicates(head.next)
-    # return head
-    next = delete_duplicates(head.next)
-    if head.val == next.val:
-        return next
-    else:
-        head.next = next
-        return head
