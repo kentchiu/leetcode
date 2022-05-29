@@ -1,4 +1,5 @@
-from leetcode.linked_list_easy import ListNode, delete_duplicates, prettyPrintLinkedList,  reverse_list, create_linked_list_from_list, merge_two_lists_by_list, \
+from pprint import pprint
+from leetcode.linked_list_easy import ListNode, append_node, delete_duplicates, insert_sorted, prettyPrintLinkedList, remove_all, remove_first,  reverse_list, create_linked_list_from_list, merge_two_lists_by_list, \
     merge_two_lists_by_loop, merge_two_lists_by_recursive, print_linked_list, delete_node, remove_nth_from_end, \
     is_palindrome, middle_node, has_cycle, reverse_list_recursive
 
@@ -172,52 +173,6 @@ def test_delete_duplicated():
         l4), format='list') == '[1]'
 
 
-def s_print(head: ListNode) -> None:
-    if not head:
-        return
-    print(f'-> {head.val}')
-    s_print(head.next)
-    print(f'<- {head.val}')
-
-
-def test_print():
-    l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
-    s_print(l1)
-
-
-def sum(head: ListNode) -> int:
-    if not head:
-        return 0
-    val = head.val
-    s = sum(head.next)
-    print(f'{val} + {s} = {val + s}')
-    return val + s
-
-
-def test_sum():
-    l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
-    assert sum(l1) == 15
-
-
-def append_node(head: ListNode, val: int) -> ListNode:
-    if not head:
-        return ListNode(val)
-    head.next = append_node(head.next, val)
-    return head
-
-
-def insert_sorted(head: ListNode, val: int) -> ListNode:
-    if not head:
-        return ListNode(val)
-
-    if val < head.val:
-        head = ListNode(val, head)
-    else:
-        head.next = insert_sorted(head.next, val)
-
-    return head
-
-
 def test_append_node():
     l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
     l1_new = append_node(l1, 9)
@@ -236,18 +191,6 @@ def test_insert_sorted():
         l2_new, format='list') == '[1, 2, 3, 4, 5, 6, 9]'
 
 
-def remove_first(head: ListNode, val: int) -> ListNode:
-    if not head:
-        return None
-
-    if head.val == val:
-        head = head.next
-    else:
-        head.next = remove_first(head.next, val)
-
-    return head
-
-
 def test_remove_first():
     l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
     assert print_linked_list(remove_first(
@@ -260,18 +203,6 @@ def test_remove_first():
         l3, 5), format='list') == '[1, 2, 3, 4]'
 
 
-def remove_all(head: ListNode, val: int) -> ListNode:
-    if not head:
-        return None
-
-    if head.val == val:
-        head = remove_all(head.next, val)
-    else:
-        head.next = remove_all(head.next, val)
-
-    return head
-
-
 def test_remove_all():
     l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
     assert print_linked_list(remove_all(
@@ -282,3 +213,5 @@ def test_remove_all():
     l3 = create_linked_list_from_list([1, 2, 1, 4, 1])
     assert print_linked_list(remove_all(
         l3, 1), format='list') == '[2, 4]'
+
+

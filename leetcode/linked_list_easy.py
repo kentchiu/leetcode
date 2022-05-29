@@ -375,6 +375,76 @@ def delete_duplicates(head: ListNode) -> ListNode:
     return head
 
 
+def remove_first(head: ListNode, val: int) -> ListNode:
+    if not head:
+        return None
+
+    if head.val == val:
+        head = head.next
+    else:
+        head.next = remove_first(head.next, val)
+
+    return head
+
+
+def remove_all(head: ListNode, val: int) -> ListNode:
+    if not head:
+        return None
+
+    if head.val == val:
+        head = remove_all(head.next, val)
+    else:
+        head.next = remove_all(head.next, val)
+
+    return head
+
+
+def s_print(head: ListNode) -> None:
+    if not head:
+        return
+    print(f'-> {head.val}')
+    s_print(head.next)
+    print(f'<- {head.val}')
+
+
+def sum(head: ListNode) -> int:
+    if not head:
+        return 0
+    val = head.val
+    s = sum(head.next)
+    print(f'{val} + {s} = {val + s}')
+    return val + s
+
+
+def append_node(head: ListNode, val: int) -> ListNode:
+    if not head:
+        return ListNode(val)
+    head.next = append_node(head.next, val)
+    return head
+
+
+def insert_sorted(head: ListNode, val: int) -> ListNode:
+    if not head:
+        return ListNode(val)
+
+    if val < head.val:
+        head = ListNode(val, head)
+    else:
+        head.next = insert_sorted(head.next, val)
+
+    return head
+
+
+def test_print():
+    l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
+    s_print(l1)
+
+
+def test_sum():
+    l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
+    assert sum(l1) == 15
+
+
 #######################################
 # Util Methods
 #######################################
