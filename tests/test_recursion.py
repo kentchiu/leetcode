@@ -1,4 +1,3 @@
-
 def print_1_to_n(n: int):
     if n == 0:
         return  # Base Condition
@@ -23,10 +22,10 @@ def test_print_n_to_1():
 
 def reverse_string(input: str):
     # Base Condition
-    if input == '':
+    if input == "":
         return ""
 
-     # Shrink th problem space
+    # Shrink th problem space
     shrink = input[1:]
     s = reverse_string(shrink)
 
@@ -36,7 +35,7 @@ def reverse_string(input: str):
 
 
 def test_reverse_string():
-    assert reverse_string('hello') == 'olleh'
+    assert reverse_string("hello") == "olleh"
 
 
 def is_palindrome(input: str) -> bool:
@@ -49,17 +48,17 @@ def is_palindrome(input: str) -> bool:
 
     if head == tail:  # Smallest unit of work to contribute
         # Shrink th problem space
-        shrink = input[1: -1]
+        shrink = input[1:-1]
         return is_palindrome(shrink)
     else:
         return False
 
 
 def test_is_palindrome():
-    assert is_palindrome('kayak') == True
-    assert is_palindrome('abc') == False
-    assert is_palindrome('abcba') == True
-    assert is_palindrome('racecar') == True
+    assert is_palindrome("kayak") == True
+    assert is_palindrome("abc") == False
+    assert is_palindrome("abcba") == True
+    assert is_palindrome("racecar") == True
 
 
 def decimal_to_binary(decimal: int) -> str:
@@ -77,11 +76,11 @@ def decimal_to_binary(decimal: int) -> str:
 
 
 def test_decimal_to_binary():
-    assert decimal_to_binary(1) == '1'
-    assert decimal_to_binary(0) == '0'
-    assert decimal_to_binary(15) == '1111'
-    assert decimal_to_binary(8) == '1000'
-    assert decimal_to_binary(233) == '11101001'
+    assert decimal_to_binary(1) == "1"
+    assert decimal_to_binary(0) == "0"
+    assert decimal_to_binary(15) == "1111"
+    assert decimal_to_binary(8) == "1000"
+    assert decimal_to_binary(233) == "11101001"
 
 
 def sum_of_nums(num: int) -> int:
@@ -109,9 +108,9 @@ def binary_search(input: list[int], target: int) -> int:
 
         # mid 每次會縮小一半, 但是這邊沒有達到完全 shrink 的效果, 如果 right - left = 1, mid 會是 0,
         # 再次 right - left 的結果都是 1, 形成 infinity loop
-        mid = left + (right-left) // 2
+        mid = left + (right - left) // 2
 
-        print(f'L:{left}, R: {right}, m: {mid}, mv: {input[mid]}')
+        print(f"L:{left}, R: {right}, m: {mid}, mv: {input[mid]}")
 
         if input[mid] == target:
             return mid
@@ -138,7 +137,7 @@ def test_binary_search():
 
 def fibonacci(n: int) -> list[int]:
     """
-    要從最滿足第一個 recursive call, 讓 n 有初始值 , 才有辦法做 n -1 , n-2 的 recrustions
+    要從最滿足第一個 recursive call, 讓 n 有初始值 , 才有辦法做 n -1 , n-2 的 recursion
     """
     # Base Condition
     if n == 0 or n == 1:

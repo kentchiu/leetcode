@@ -26,7 +26,6 @@ linked list 通常是要求用 in place 處理, 充分利用 linked list 特性,
 """
 from pprint import pprint
 from typing import Optional
-from xml.dom.minicompat import NodeList
 
 
 class ListNode:
@@ -72,7 +71,7 @@ def reverse_list(head: ListNode | None) -> ListNode | None:
     return prev
 
 
-def reverse_list_recursive(head: Optional[NodeList]) -> Optional[NodeList]:
+def reverse_list_recursive(head: Optional[ListNode]) -> Optional[ListNode]:
     # Base Condition
     if head == None or head.next == None:
         return head
@@ -92,7 +91,9 @@ def merge_two_lists(list1: ListNode | None, list2: ListNode | None) -> ListNode 
     return merge_two_lists_by_loop(list1, list2)
 
 
-def merge_two_lists_by_loop(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
+def merge_two_lists_by_loop(
+    list1: ListNode | None, list2: ListNode | None
+) -> ListNode | None:
     """
     list 1: 1 -> 2 -> 4
     list 2: 1 -> 3 -> 4
@@ -177,7 +178,9 @@ def merge_two_lists_by_loop(list1: ListNode | None, list2: ListNode | None) -> L
     return dummy.next
 
 
-def merge_two_lists_by_recursive(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
+def merge_two_lists_by_recursive(
+    list1: ListNode | None, list2: ListNode | None
+) -> ListNode | None:
     if list1 is None:
         return list2
     if list2 is None:
@@ -191,7 +194,9 @@ def merge_two_lists_by_recursive(list1: ListNode | None, list2: ListNode | None)
         return list2
 
 
-def merge_two_lists_by_list(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
+def merge_two_lists_by_list(
+    list1: ListNode | None, list2: ListNode | None
+) -> ListNode | None:
     """
     用 list 處理, non in place 的做法, 先轉換成 list , 做完串接及排序後, 在將 list 轉成 linked list
     """
@@ -311,8 +316,14 @@ def middle_node(head: Optional[ListNode]) -> Optional[ListNode]:
     fast = head
     slow = head
 
-    if fast is None or fast.next is None or fast.next.next is None:
+    if fast is None:
         return None
+
+    if fast.next is None:
+        return fast
+
+    if fast.next.next is None:
+        return fast.next
 
     while fast.next and fast.next.next:
         slow = slow.next
@@ -352,23 +363,6 @@ def delete_duplicates(head: ListNode) -> ListNode:
     # Base case
     if head == None or head.next == None:
         return head
-
-    if head.val == head.next.val:
-        head.next = head.next.next
-        delete_duplicates(head)
-    else:
-        delete_duplicates(head.next)
-    return head
-
-
-def delete_duplicates(head: ListNode) -> ListNode:
-    """
-    problem: https://leetcode.cn/problems/remove-duplicates-from-sorted-list
-    """
-
-    # Base case
-    if head == None or head.next == None:
-        return head
     head.next = delete_duplicates(head.next)
     if head.val == head.next.val:
         head.next = head.next.next
@@ -376,7 +370,7 @@ def delete_duplicates(head: ListNode) -> ListNode:
 
 
 def remove_first(head: ListNode, val: int) -> ListNode:
-    if not head:
+    if head is None:
         return None
 
     if head.val == val:
@@ -388,7 +382,7 @@ def remove_first(head: ListNode, val: int) -> ListNode:
 
 
 def remove_all(head: ListNode, val: int) -> ListNode:
-    if not head:
+    if head is None:
         return None
 
     if head.val == val:
@@ -400,31 +394,30 @@ def remove_all(head: ListNode, val: int) -> ListNode:
 
 
 def s_print(head: ListNode) -> None:
-    if not head:
+    if head is None:
         return
-    print(f'-> {head.val}')
+    print(f"-> {head.val}")
     s_print(head.next)
-    print(f'<- {head.val}')
+    print(f"<- {head.val}")
 
 
 def sum(head: ListNode) -> int:
-    if not head:
+    if head is None:
         return 0
     val = head.val
     s = sum(head.next)
-    print(f'{val} + {s} = {val + s}')
     return val + s
 
 
 def append_node(head: ListNode, val: int) -> ListNode:
-    if not head:
+    if head is None:
         return ListNode(val)
     head.next = append_node(head.next, val)
     return head
 
 
 def insert_sorted(head: ListNode, val: int) -> ListNode:
-    if not head:
+    if head is None:
         return ListNode(val)
 
     if val < head.val:
@@ -435,31 +428,21 @@ def insert_sorted(head: ListNode, val: int) -> ListNode:
     return head
 
 
-def test_print():
-    l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
-    s_print(l1)
-
-
-def test_sum():
-    l1 = create_linked_list_from_list([1, 2, 3, 4, 5])
-    assert sum(l1) == 15
-
-
 #######################################
 # Util Methods
 #######################################
 
 
-def linked_list_to_list(node: ListNode) -> [int]:
+def linked_list_to_list(node: ListNode) -> list[int]:
     # linked list to list
-    result: [int] = []
+    result: list[int] = []
     while node:
         result.append(node.val)
         node = node.next
     return result
 
 
-def list_to_lined_list(vals: [int]) -> ListNode:
+def list_to_lined_list(vals: list[int]) -> ListNode:
     nodes = [ListNode(val) for val in vals]
     for idx, node in enumerate(nodes):
         if idx < len(nodes) - 1:
@@ -483,29 +466,29 @@ def create_linked_list_from_list(nums: list):
     return nodes[0]
 
 
-def print_linked_list(node: ListNode, format='arrow') -> str:
+def print_linked_list(node: ListNode, format="arrow") -> str:
     """
     Util method for print linked list
     """
-    result = ''
+    result = ""
     while node:
         result += str(node.val)
         if node.next:
-            if format == 'list':
-                result += ', '
+            if format == "list":
+                result += ", "
             else:
-                result += ' -> '
+                result += " -> "
         node = node.next
 
-    if format == 'list':
-        result = '[' + result + ']'
+    if format == "list":
+        result = "[" + result + "]"
 
     return result
 
 
 def prettyPrintLinkedList(node):
     while node and node.next:
-        print(str(node.val) + "->", end='')
+        print(str(node.val) + "->", end="")
         node = node.next
 
     if node:

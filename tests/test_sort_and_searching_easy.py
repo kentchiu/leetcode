@@ -1,5 +1,3 @@
-
-
 from leetcode.sort_and_searching_easy import first_bad_version, merge
 
 

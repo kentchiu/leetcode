@@ -29,7 +29,7 @@ def max_profit_timeout(prices: List[int]) -> int:
     max = 0
     for i, p1 in enumerate(prices):
         for j, p2 in enumerate(prices[i:]):
-            print(f'i:{i}->{p1}, j:{j}->{p2}')
+            print(f"i:{i}->{p1}, j:{j}->{p2}")
             profit = p2 - p1
             if profit > max:
                 max = profit
@@ -38,7 +38,7 @@ def max_profit_timeout(prices: List[int]) -> int:
 
 def max_profit(prices: List[int]) -> int:
     # 這個算是 two pointer 的解法, 也不太算是 DP
-    min_price = float('inf')
+    min_price = float("inf")
     max_profit = 0
 
     for price in prices:

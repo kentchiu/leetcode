@@ -1,14 +1,22 @@
 from ast import For
 
-from leetcode.tree_easy import create_tree_from_list, is_symmetric, level_order, max_depth_2, sorted_array_to_BST, visit, Order, max_depth, is_valid_BST
+from leetcode.tree_easy import (
+    create_tree_from_list,
+    is_symmetric,
+    level_order,
+    max_depth_2,
+    sorted_array_to_BST,
+    visit,
+    Order,
+    max_depth,
+    is_valid_BST,
+)
 
 
 def test_is_valid_BST():
     assert is_valid_BST(create_tree_from_list([2, 1, 3])) == True
-    assert is_valid_BST(create_tree_from_list(
-        [5, 1, 4, None, None, 3, 6])) == False
-    assert is_valid_BST(create_tree_from_list(
-        [5, 4, 6, None, None, 3, 7])) == False
+    assert is_valid_BST(create_tree_from_list([5, 1, 4, None, None, 3, 6])) == False
+    assert is_valid_BST(create_tree_from_list([5, 4, 6, None, None, 3, 7])) == False
     assert is_valid_BST(create_tree_from_list([1, 1])) == False
     assert is_valid_BST(create_tree_from_list([1])) == True
     assert is_valid_BST(create_tree_from_list([])) == True
@@ -27,18 +35,25 @@ def test_max_depth_2():
 
 
 def test_is_symmetric():
-    assert is_symmetric(create_tree_from_list(
-        [1, 2, 2, 3, 4, 4, 3, 5, None, None, 6, 6, None, None, 5])) == True
+    assert (
+        is_symmetric(
+            create_tree_from_list(
+                [1, 2, 2, 3, 4, 4, 3, 5, None, None, 6, 6, None, None, 5]
+            )
+        )
+        == True
+    )
     assert is_symmetric(create_tree_from_list([1, 2, 2, 3, 4, 4, 3])) == True
-    assert is_symmetric(create_tree_from_list(
-        [1, 2, 2, None, 3, None, 3])) == False
-    assert is_symmetric(create_tree_from_list(
-        [1, 2, 2, None, 3, 3, None])) == True
+    assert is_symmetric(create_tree_from_list([1, 2, 2, None, 3, None, 3])) == False
+    assert is_symmetric(create_tree_from_list([1, 2, 2, None, 3, 3, None])) == True
 
 
 def test_level_order():
     assert level_order(create_tree_from_list([3, 9, 20, None, None, 15, 7])) == [
-        [3], [9, 20], [15, 7]]
+        [3],
+        [9, 20],
+        [15, 7],
+    ]
     assert level_order(create_tree_from_list([1])) == [[1]]
     assert level_order(create_tree_from_list([])) == []
 
@@ -62,8 +77,9 @@ def test_sorted_array_to_BST():
     assert node9.val == 9
 
     root = sorted_array_to_BST(
-        [-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    visit(root, order=Order.LEVELORDER, callback=lambda n: print(f'v: {n}'))
+        [-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    )
+    visit(root, order=Order.LEVELORDER, callback=lambda n: print(f"v: {n}"))
 
 
 #####################
@@ -73,7 +89,8 @@ def test_sorted_array_to_BST():
 
 def test_build_tree_from_list():
     node0 = create_tree_from_list(
-        [0, 1, 2, 3, 4, None, 5, 6, 7, None, None, None, None, 8, 9])
+        [0, 1, 2, 3, 4, None, 5, 6, 7, None, None, None, None, 8, 9]
+    )
 
     assert node0.val == 0
     assert node0.left.val == 1
@@ -104,7 +121,7 @@ def test_build_tree_from_list():
     assert node6.left is None
     assert node6.right is None
 
-    visit(node0, order=Order.LEVELORDER, callback=lambda n: print(f'v: {n}'))
+    visit(node0, order=Order.LEVELORDER, callback=lambda n: print(f"v: {n}"))
 
 
 def test_build_tree_from_list_2():
@@ -129,7 +146,7 @@ def test_build_tree_from_list_2():
     assert node15.left is None
     assert node15.right is None
 
-    visit(node3, order=Order.LEVELORDER, callback=lambda n: print(f'v: {n}'))
+    visit(node3, order=Order.LEVELORDER, callback=lambda n: print(f"v: {n}"))
 
 
 def test_build_tree_from_list_3():

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 
 def merge(nums1: List[int], m: int, nums2: List[int], n: int) -> None:

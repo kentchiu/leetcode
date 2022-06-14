@@ -4,7 +4,7 @@ from operator import le
 from time import perf_counter
 from typing import List, Optional
 
-Order = Enum('Order', 'PREORDER INORDER POSTORDER LEVELORDER')
+Order = Enum("Order", "PREORDER INORDER POSTORDER LEVELORDER")
 
 
 class TreeNode:
@@ -15,12 +15,12 @@ class TreeNode:
 
     def __str__(self):
         val = str(self.val)
-        left, right = '', ''
+        left, right = "", ""
         if self.left:
-            left = f'({self.left.val})'
+            left = f"({self.left.val})"
         if self.right:
-            right = f'({self.right.val})'
-        return f'{val}, L:{left}, R:{right}'
+            right = f"({self.right.val})"
+        return f"{val}, L:{left}, R:{right}"
 
     def __repr__(self) -> str:
         return str(self.val)
@@ -47,7 +47,7 @@ def max_depth_2(root: Optional[TreeNode]) -> int:
         left = max_depth(node.left)
         right = max_depth(node.right)
 
-        print(f'node:{node.val},L-depth:{left},R-depth:{right}')
+        print(f"node:{node.val},L-depth:{left},R-depth:{right}")
 
         # Induction
         return max(left, right) + 1
@@ -58,6 +58,7 @@ def max_depth_2(root: Optional[TreeNode]) -> int:
 def is_valid_BST(root: Optional[TreeNode]) -> bool:
     # Use maximal system integer to represent infinity
     import sys
+
     INF = sys.maxsize
 
     def visit(node: Optional[TreeNode], lower, upper) -> bool:
@@ -66,7 +67,9 @@ def is_valid_BST(root: Optional[TreeNode]) -> bool:
 
         if lower < node.val < upper:
             # check if all tree nodes follow BST rule
-            return visit(node.left, lower, node.val) and visit(node.right, node.val, upper)
+            return visit(node.left, lower, node.val) and visit(
+                node.right, node.val, upper
+            )
         else:
             return False
 
@@ -98,7 +101,11 @@ def is_symmetric(root: Optional[TreeNode]) -> bool:
             return False
 
         # 兩邊都有值
-        return node1.val == node2.val and is_mirror(node1.left, node2.right) and is_mirror(node1.right, node2.left)
+        return (
+            node1.val == node2.val
+            and is_mirror(node1.left, node2.right)
+            and is_mirror(node1.right, node2.left)
+        )
 
     if root is None:
         return True
@@ -118,13 +125,12 @@ def level_order(root: TreeNode) -> List[List[int]]:
     """
 
     def monkey_dump(self):
-        return f'{self.val}@{self.level}'
+        return f"{self.val}@{self.level}"
 
     TreeNode.__repr__ = monkey_dump
 
     def add_to_level_dict(level_dict: dict, node: TreeNode):
-        level = level_dict.get(
-            node.level) if level_dict.get(node.level) else []
+        level = level_dict.get(node.level) if level_dict.get(node.level) else []
         level.append(node.val)
         level_dict.update({node.level: level})
 
@@ -136,7 +142,7 @@ def level_order(root: TreeNode) -> List[List[int]]:
     q = [root]
     level_dict: dict[int, int] = {}
     while len(q) != 0:
-        print(f'q: {q}')
+        print(f"q: {q}")
         node = q[0]
         nodes.append(node)
         add_to_level_dict(level_dict, node)
@@ -166,7 +172,7 @@ def sorted_array_to_BST(nums: List[int]) -> Optional[TreeNode]:
 
         root = TreeNode(nums[mid])
         root.left = helper(nums, left, mid - 1)
-        root.right = helper(nums, mid+1, right)
+        root.right = helper(nums, mid + 1, right)
 
         return root
 
@@ -198,7 +204,7 @@ def create_tree_from_list(list: list) -> Optional[TreeNode]:
     return node_list[0]
 
 
-Order = Enum('Order', 'PREORDER INORDER POSTORDER LEVELORDER')
+Order = Enum("Order", "PREORDER INORDER POSTORDER LEVELORDER")
 
 
 def visit(node: TreeNode, order: Order = Order.PREORDER, callback=None):
@@ -243,14 +249,12 @@ def prettyPrintTree(node, prefix="", isLeft=True):
         return
 
     if node.right:
-        prettyPrintTree(node.right, prefix +
-                        ("│   " if isLeft else "    "), False)
+        prettyPrintTree(node.right, prefix + ("│   " if isLeft else "    "), False)
 
     print(prefix + ("└── " if isLeft else "┌── ") + str(node.val))
 
     if node.left:
-        prettyPrintTree(node.left, prefix +
-                        ("    " if isLeft else "│   "), True)
+        prettyPrintTree(node.left, prefix + ("    " if isLeft else "│   "), True)
 
 
 def stringToIntegerList(input):
